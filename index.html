@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CleanFPS</title>
+
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 24px;
+      line-height: 1.6;
+      color: #111;
+      background: #fff;
+    }
+
+    h1 {
+      font-size: 42px;
+      margin: 0;
+    }
+
+    h2 {
+      margin-top: 40px;
+      font-size: 24px;
+    }
+
+    p {
+      font-size: 18px;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 14px 20px;
+      border-radius: 12px;
+      text-decoration: none;
+      background: #111;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .box {
+      margin-top: 32px;
+      padding: 24px;
+      border: 1px solid #ddd;
+      border-radius: 16px;
+    }
+
+    .small {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .title {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="title">
+    <img src="icon.png" alt="CleanFPS icon" class="icon">
+    <h1>CleanFPS</h1>
+  </div>
+
+  <p class="small">
+    Requisiti minimi: macOS 13 Ventura • Apple Silicon
+  </p>
+
+  <p>
+    L'app analizza i video, rimuove i frame duplicati e genera un file pulito a FPS costante
+    esportato in ProRes 422 HQ. I video a FPS variabile (VFR) non sono supportati.
+  </p>
+
+  <div class="box">
+    <h2>Modalità video</h2>
+    <p>
+      Sono disponibili due modalità di esportazione video:
+    </p>
+    <p>
+      • <strong>Retime</strong>: mantiene lo stesso framerate e gli stessi frame effettivi del video originale,
+      quindi la durata finale diminuisce.
+    </p>
+    <p>
+      • <strong>Reframe</strong>: mantiene la stessa durata e gli stessi frame effettivi del video originale,
+      quindi il framerate finale diminuisce.
+    </p>
+  </div>
+
+  <div class="box">
+    <h2>Modalità audio</h2>
+    <p>
+      A ogni modalità video si può associare una modalità di esportazione audio:
+    </p>
+
+    <p>
+      • <strong>Adata</strong><br>
+      Con Retime l'audio viene velocizzato per adattarsi alla nuova durata del video.<br>
+      Con Reframe l'audio viene mantenuto così com'è, perché ha già la durata corretta.
+    </p>
+
+    <p>
+      • <strong>Taglia</strong><br>
+      Viene creato un "audio pulito" rimuovendo le parti corrispondenti ai frame duplicati.<br>
+      Con Retime questo audio viene mantenuto così com'è.<br>
+      Con Reframe viene rallentato per adattarsi alla durata del video.
+    </p>
+
+    <p>
+      • <strong>Focus</strong><br>
+      Viene creato un "audio focus" rimuovendo le parti corrispondenti ai frame duplicati.
+      Negli intervalli in cui viene rilevato uno slow motion, l'audio viene velocizzato invece di essere tagliato.
+      L'app riconosce slow motion 0,5x e 0,25x, applicando rispettivamente accelerazioni 2x e 4x.<br>
+      Con Retime questo audio viene mantenuto così com'è.<br>
+      Con Reframe viene rallentato per adattarsi alla durata del video.
+    </p>
+  </div>
+
+  <div class="box">
+    <h2>Come funziona</h2>
+    <p>
+      Basta trascinare un video nell'app, scegliere la modalità video e la modalità audio desiderata,
+      quindi avviare l'elaborazione.
+    </p>
+    <p>
+      CleanFPS identifica i frame duplicati, ricostruisce il video pulito e genera un file ProRes 422 HQ
+      coerente con le impostazioni selezionate.
+    </p>
+  </div>
+
+  <div class="box">
+    <h2>Download</h2>
+
+    <p class="small">
+      Versione: 20-04-2026
+    </p>
+
+    <a class="button" href="https://github.com/dbosch99/CleanFPS/releases/latest/download/CleanFPS-macOS.zip">
+      Scarica per macOS
+    </a>
+
+    <p class="small">
+      L'app non è firmata con certificato Apple. macOS bloccherà il primo avvio.
+      Segui le istruzioni incluse nello ZIP per aprirla.
+    </p>
+  </div>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js', { scope: './' }).catch(console.error);
+      });
+    }
+  </script>
+
+</body>
+</html>
